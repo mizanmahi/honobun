@@ -1,20 +1,21 @@
 {
-  "name": "honobun",
-  "module": "src/app.ts",
-  "type": "module",
-  "scripts": {
-    "dev": "bun --watch src/server.ts",
-    "clean": "rm -rf dist && echo 'Dist removed.'"
-  },
-  "devDependencies": {
-    "@types/bun": "^1.0.12",
-    "prisma": "^5.12.1"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@prisma/client": "^5.12.1",
-    "hono": "^4.2.2"
-  }
+   "name": "honobun",
+   "module": "src/app.ts",
+   "type": "module",
+   "scripts": {
+      "dev": "bun --watch src/server.ts",
+      "clean": "rm -rf dist && echo 'Dist removed.'",
+      "prisma:studio": "bunx prisma studio"
+   },
+   "devDependencies": {
+      "@types/bun": "^1.0.12",
+      "prisma": "^5.12.1"
+   },
+   "peerDependencies": {
+      "typescript": "^5.0.0"
+   },
+   "dependencies": {
+      "@prisma/client": "^5.12.1",
+      "hono": "^4.2.2"
+   }
 }
