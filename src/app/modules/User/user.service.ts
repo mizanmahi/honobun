@@ -1,4 +1,3 @@
-import type { User } from '@prisma/client';
 import prisma from '../../../shared/prisma';
 import type { IUser } from './user.interfaces';
 
@@ -7,7 +6,19 @@ const createUserIntoDB = async (payload: IUser) => {
       data: payload,
    });
 };
+const getUserFromDB = async () => {
+   return await prisma.user.findMany();
+};
+const deleteUser = async (id: string) => {
+   return await prisma.user.delete({
+      where: {
+         id,
+      },
+   });
+};
 
 export const userServices = {
    createUserIntoDB,
+   getUserFromDB,
+   deleteUser,
 };

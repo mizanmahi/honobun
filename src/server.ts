@@ -14,7 +14,13 @@ app.notFound((c) => {
 
 app.onError((err, c) => {
    console.error(`${err}`);
-   return c.text('Internal Server Error', 500);
+   return c.json(
+      {
+         success: false,
+         message: err.message || 'Internal server error',
+      },
+      500
+   );
 });
 
 export default {
