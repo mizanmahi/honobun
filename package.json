@@ -5,7 +5,8 @@
    "scripts": {
       "dev": "bun --watch src/server.ts",
       "clean": "rm -rf dist && echo 'Dist removed.'",
-      "prisma:studio": "bunx prisma studio"
+      "prisma:studio": "bunx prisma studio",
+      "test": "bun test"
    },
    "devDependencies": {
       "@types/bun": "^1.0.12",
