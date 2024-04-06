@@ -1,11 +1,8 @@
 import { expect, test, describe } from 'bun:test';
 
-describe('arithmetic', () => {
-   test('2 + 2', () => {
-      expect(2 + 2).toBe(4);
-   });
-
-   test('2 * 2', () => {
-      expect(2 * 2).toBe(4);
+describe('User', () => {
+   test('should return 200', async () => {
+      const result = await fetch('http://localhost:5000/user');
+      expect(result.status).toBe(200);
    });
 });
