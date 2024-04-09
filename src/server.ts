@@ -1,6 +1,7 @@
 import app from './app';
+import config from './config';
 
 export default {
    fetch: app.fetch,
-   port: 5000,
+   port: config.port,
 };

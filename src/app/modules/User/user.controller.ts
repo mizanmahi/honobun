@@ -1,5 +1,7 @@
 import type { Context } from 'hono';
 import { userServices } from './user.service';
+import { validQueryParams } from './user.constant';
+import { filterValidQueryParams } from '../../../shared/filterValidQueryParams';
 
 const createUser = async (c: Context) => {
    const user = await c.req.json();
@@ -13,10 +15,22 @@ const createUser = async (c: Context) => {
 };
 
 const getUser = async (c: Context) => {
-   const result = await userServices.getUserFromDB();
+   const queries = c.req.query();
+   const validQueries = filterValidQueryParams(queries, validQueryParams);
+   const result = await userServices.getUserFromDB(validQueries);
    return c.json({
       success: true,
       message: 'User fetched successfully!',
+      data: result,
+   });
+};
+const updateUser = async (c: Context) => {
+   const { userId } = c.req.param();
+   const payload = await c.req.json();
+   const result = await userServices.updateUserIntoDB(userId, payload);
+   return c.json({
+      success: true,
+      message: 'User updated successfully!',
       data: result,
    });
 };
@@ -34,4 +48,5 @@ export const userController = {
    createUser,
    getUser,
    deleteUser,
+   updateUser,
 };
