@@ -2,6 +2,9 @@ import { HTTPException } from 'hono/http-exception';
 import prisma from '../../../shared/prisma';
 import bcrypt from 'bcrypt';
 import httpStatus from 'http-status';
+import config from '../../../config';
+import type { Secret } from 'jsonwebtoken';
+import { jwtHelpers } from '../../../helpers/jwtHelper';
 
 const loginUser = async (userInfo: any) => {
    const userData = await prisma.user.findUniqueOrThrow({
@@ -17,11 +20,17 @@ const loginUser = async (userInfo: any) => {
 
    if (!isPasswordMatched) {
       throw new HTTPException(httpStatus.UNAUTHORIZED, {
-         message: 'Unauthorized',
+         message: 'incorrect Password',
       });
    }
 
-   const accessToken = 'sfsfsdfsfdf';
+   const accessToken = jwtHelpers.generateToken(
+      {
+         email: userData.email,
+      },
+      config.jwt.secret as Secret,
+      config.jwt.expires_in as string
+   );
 
    return {
       accessToken,
