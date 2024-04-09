@@ -14,14 +14,17 @@ datasource db {
 }
 
 model User {
-  id    String  @id @default(uuid())
-  email String  @unique
-  name  String?
-  blogs Blog[]
+  id       String  @id @default(uuid())
+  name     String?
+  email    String  @unique
+  password String
+  blogs    Blog[]
 }
 
 model Blog {
   id        String   @id @default(uuid())
+  title     String
+  content   String
   authorId  String
   author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
