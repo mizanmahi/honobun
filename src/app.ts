@@ -1,7 +1,8 @@
 import { Hono } from 'hono';
+import { HTTPException } from 'hono/http-exception';
 import { userRoutes } from './app/modules/User/user.routes';
 import { authRoutes } from './app/modules/Auth/auth.routes';
-import { HTTPException } from 'hono/http-exception';
+import { blogRoutes } from './app/modules/Blog/blog.routes';
 
 const app = new Hono();
 
@@ -11,6 +12,7 @@ app.get('/', (ctx) => {
 
 app.route('/user', userRoutes);
 app.route('/auth', authRoutes);
+app.route('/blog', blogRoutes);
 
 app.notFound((ctx) => {
    return ctx.text('Api Not Found', 404);
